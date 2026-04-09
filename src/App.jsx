@@ -102,6 +102,16 @@ import powerBiLogo from './assets/tech/power bI-Photoroom.png';
 import qdrantLogo from './assets/tech/Qdrant VDB-Photoroom.png';
 import chromaLogo from './assets/tech/chromadb.png';
 import zenithImg from './assets/projects/Screenshot 2026-03-29 173923.png';
+import thermoboxImg from './assets/projects/ChatGPT Image Apr 9, 2026, 01_17_49 PM.png';
+
+// Import Certificates
+import certBA from './assets/certificates/Screenshot 2026-03-25 132855.png';
+import certPM from './assets/certificates/Screenshot 2026-04-08 113409.png';
+
+// Import Badges
+import badgeSalesforce from './assets/badges/agentblazer-level-1-a564a869686f7b888fabd8c82dafaf25928fa006be2388ab57e6f232876c2bf0.png';
+import badgeGithub1 from './assets/badges/1775581859666.jpg';
+import badgeGithub2 from './assets/badges/1775581859791.jpg';
 
 // Fallback images in case assets are missing
 const defaultLogo = "https://ui-avatars.com/api/?name=Logo&background=1e293b&color=fff";
@@ -248,7 +258,7 @@ function App() {
       duration: "2025",
       description: "Developed an IoT-enabled lunchbox with heating and cooling functionality to maintain meal temperature for office workers and travelers, focusing on smart temperature control and user-centered design.",
       tech: ["Arduino", "Sensors", "C++"],
-      image: "https://placehold.co/600x400/0a0a0a/yellow?text=Thermobox+IoT"
+      image: thermoboxImg
     },
     {
       title: "Restaurant Management System",
@@ -295,13 +305,13 @@ function App() {
     {
       title: "Business Analysis Essential Tools and Techniques",
       issuer: "Microsoft & LinkedIn",
-      thumbnail: "/src/assets/certificates/Screenshot 2026-03-25 132855.png",
+      thumbnail: certBA,
       verifyUrl: "https://www.linkedin.com/learning/certificates/2ebb2fa010f54b7ff92abb27b9539842c0980299a5a690d588b776431fcf7155?trk=share_certificate"
     },
     {
       title: "Project Management Foundations",
       issuer: "Microsoft & LinkedIn",
-      thumbnail: "/src/assets/certificates/Screenshot 2026-04-08 113409.png"
+      thumbnail: certPM
     },
     { title: "Career Essentials in Business Analysis", issuer: "Microsoft & LinkedIn" },
     { title: "Agile Project Management", issuer: "LinkedIn" },
@@ -312,11 +322,11 @@ function App() {
   ];
 
   const digitalBadges = [
-    { title: "Agentblazer Champion", issuer: "Salesforce", image: "/src/assets/badges/agentblazer-level-1-a564a869686f7b888fabd8c82dafaf25928fa006be2388ab57e6f232876c2bf0.png" },
+    { title: "Agentblazer Champion", issuer: "Salesforce", image: badgeSalesforce },
     { title: "Python Essentials 1", issuer: "Python Institute", image: "https://placehold.co/400x400/eab308/fff?text=Python" },
     { title: "API Fundamentals", issuer: "Postman", image: "https://placehold.co/400x400/ff6c37/fff?text=Postman" },
-    { title: "GitHub for Beginners", issuer: "GitHub", image: "/src/assets/badges/1775581859666.jpg", removeBg: true },
-    { title: "GitHub Actions Beginner", issuer: "GitHub", image: "/src/assets/badges/1775581859791.jpg", removeBg: true }
+    { title: "GitHub for Beginners", issuer: "GitHub", image: badgeGithub1, removeBg: true },
+    { title: "GitHub Actions Beginner", issuer: "GitHub", image: badgeGithub2, removeBg: true }
   ];
 
   const extraCurricular = [
