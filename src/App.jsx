@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Mail, Phone, Download, ExternalLink, Github, Linkedin, Briefcase, GraduationCap, ChevronRight, CheckCircle2, Code, Facebook, Instagram, MessageCircle, RefreshCw, Users, Database, LineChart, FileSpreadsheet, Code2, Cpu, Gamepad2, Workflow, Braces, Navigation, Bot, Sparkles, Zap, BrainCircuit } from 'lucide-react';
+import { MapPin, Calendar, Mail, Phone, Download, ExternalLink, Github, Linkedin, Briefcase, GraduationCap, ChevronLeft, ChevronRight, CheckCircle2, Code, Facebook, Instagram, MessageCircle, RefreshCw, Users, Database, LineChart, FileSpreadsheet, Code2, Cpu, Gamepad2, Workflow, Braces, Navigation, Bot, Sparkles, Zap, BrainCircuit } from 'lucide-react';
 
 const getTechIcon = (tech) => {
   const t = tech.toLowerCase();
@@ -21,6 +21,7 @@ const getTechIcon = (tech) => {
   if (t.includes('gemini') || t.includes('openai')) return <Sparkles size={18} className="text-yellow-400" />;
 
   if (t === 'apis' || t === 'api') return <Code2 size={18} className="text-pink-400" />;
+  if (t === 'erp') return <Database size={18} className="text-orange-400" />;
 
   const directImageMap = {
     'agile': agileSvg,
@@ -74,7 +75,9 @@ const getTechIcon = (tech) => {
     'google gemini api': 'googlegemini/8E75B2',
     'gemini api': 'googlegemini/8E75B2',
     'langchain': 'langchain/6DA099',
-    'google calendar api': 'googlecalendar/4285F4'
+    'google calendar api': 'googlecalendar/4285F4',
+    'sap': 'sap/008FD3',
+    'oracle': 'oracle/F80000'
   };
 
   const directImageUrl = directImageMap[t];
@@ -103,10 +106,19 @@ import qdrantLogo from './assets/tech/Qdrant VDB-Photoroom.png';
 import chromaLogo from './assets/tech/chromadb.png';
 import zenithImg from './assets/projects/Screenshot 2026-03-29 173923.png';
 import thermoboxImg from './assets/projects/ChatGPT Image Apr 9, 2026, 01_17_49 PM.png';
+import sahanaLankaImg from './assets/projects/WhatsApp Image 2026-04-09 at 12.17.25 AM (1).jpeg';
+import vehicleMsImg from './assets/projects/Screenshot 2026-04-17 094308.png';
+import mealPlannerImg from './assets/projects/Screenshot 2026-03-30 195552.png';
+import sahanaLanka1 from './assets/projects/photo_2026-05-28_11-29-25.jpg';
+import sahanaLanka2 from './assets/projects/photo_2026-05-28_11-29-31.jpg';
+import sahanaLanka3 from './assets/projects/photo_2026-05-28_11-29-34.jpg';
+import doomImg from './assets/projects/doom.jpg';
+import restaurantMsImg from './assets/projects/resturant ms.jpg';
 
 // Import Certificates
 import certBA from './assets/certificates/Screenshot 2026-03-25 132855.png';
 import certPM from './assets/certificates/Screenshot 2026-04-08 113409.png';
+import certBAFoundations from './assets/certificates/Screenshot 2026-05-28 130510.png';
 
 // Import Badges
 import badgeSalesforce from './assets/badges/agentblazer-level-1-a564a869686f7b888fabd8c82dafaf25928fa006be2388ab57e6f232876c2bf0.png';
@@ -127,6 +139,91 @@ const staggerContainer = {
     opacity: 1,
     transition: { staggerChildren: 0.1 }
   }
+};
+
+const ProjectCard = ({ proj, idx }) => {
+  const hasMultipleImages = proj.images && proj.images.length > 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1 }}
+      className="glass-card group flex flex-col h-full hover:-translate-y-2 relative overflow-hidden p-0"
+    >
+      {/* Project Image Pane */}
+      <div className="w-full h-48 overflow-hidden relative bg-[#0c0c1a] flex items-center justify-center">
+        {hasMultipleImages ? (
+          <div className={`w-full h-full grid gap-1.5 p-2.5 z-10 relative ${proj.images.length === 2 ? 'grid-cols-2' :
+              proj.images.length === 3 ? 'grid-cols-3' :
+                'grid-cols-4'
+            }`}>
+            {proj.images.map((img, i) => (
+              <div key={i} className="relative overflow-hidden rounded-lg h-full bg-[#030014]/50 border border-white/5 flex items-center justify-center">
+                <img
+                  src={img}
+                  alt={`${proj.title} screenshot ${i + 1}`}
+                  className="w-full h-full object-contain object-center transition-transform duration-700 opacity-70 group-hover:opacity-100 group-hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <img
+            src={proj.image}
+            alt={proj.title}
+            className="w-full h-full object-contain object-center transition-transform duration-700 opacity-60 group-hover:opacity-100 group-hover:scale-105"
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-80 pointer-events-none z-10"></div>
+        <div className="absolute top-4 right-4 z-20 flex gap-2">
+          {proj.githubUrl ? (
+            <a href={proj.githubUrl} target="_blank" rel="noreferrer" title="View Source on GitHub" className="p-2 rounded-full bg-transparent border border-transparent hover:border-white/30 text-white/80 hover:text-white hover:-translate-y-1 hover:bg-white/10 transition-all duration-300 drop-shadow-lg relative z-20 pointer-events-auto">
+              <Github size={16} />
+            </a>
+          ) : (
+            <div className="p-2 rounded-full bg-transparent border border-transparent text-white/30 transition-colors cursor-default drop-shadow-lg relative z-20 hover:text-white/40" title="Source Code Coming Soon">
+              <Github size={16} />
+            </div>
+          )}
+          {proj.liveUrl ? (
+            <a href={proj.liveUrl} target="_blank" rel="noreferrer" title="View Live Project" className="p-2 rounded-full bg-indigo-500/20 backdrop-blur-md border border-white/10 text-white/70 hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300 shadow-lg relative z-20 pointer-events-auto">
+              <ExternalLink size={16} />
+            </a>
+          ) : (
+            <div className="p-2 rounded-full bg-indigo-500/5 backdrop-blur-md border border-white/5 text-white/30 transition-colors shadow-none cursor-default hover:text-white/40" title="Link Coming Soon">
+              <ExternalLink size={16} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Project Content */}
+      <div className="p-6 relative flex flex-col flex-grow">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[50px] group-hover:bg-cyan-500/20 transition-colors pointer-events-none z-0"></div>
+        <div className="flex justify-between items-start mb-4 relative z-10">
+          <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-500/20">
+            {proj.category}
+          </span>
+          <span className="text-[10px] text-slate-500 font-medium">{proj.duration}</span>
+        </div>
+        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors leading-tight">{proj.title}</h3>
+        <p className="text-sm text-slate-400 mb-6 flex-grow leading-relaxed line-clamp-3 group-hover:text-slate-300 transition-colors">
+          {proj.description}
+        </p>
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5 mt-auto">
+          {proj.tech.map(t => (
+            <span key={t} className="flex items-center gap-1.5 text-[10px] text-slate-300 font-medium px-2 py-1 bg-white/[0.03] rounded-md border border-white/5 hover:-translate-y-0.5 shadow-sm hover:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all duration-300 cursor-default relative z-10">
+              {getTechIcon(t)}
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 function App() {
@@ -216,7 +313,7 @@ function App() {
       duration: "2025 - Present",
       description: "Developed a full-stack web system to digitalize vehicle reservations with multi-level approval workflows and double-booking prevention.",
       tech: ["React", "Express", "Node.js", "MySQL"],
-      image: "https://placehold.co/600x400/0a0a0a/cyan?text=Vehicle+MS"
+      image: vehicleMsImg
     },
     {
       title: "Zenith Project Management System",
@@ -228,21 +325,21 @@ function App() {
       githubUrl: "https://github.com/Thilanga24/Zenith-Project-Management-System",
       liveUrl: ""
     },
-    {
+    /* {
       title: "Project Performance & Tracking Dashboard",
       category: "Data Analytics",
       duration: "2024 - 2025",
       description: "Built an interactive Power BI dashboard to monitor active projects, tracking KPIs including schedule variance, budget utilization, and resource allocation. Designed Gantt charts and burndown charts, enabling project managers to identify delays 3x faster and proactively mitigate risks.",
       tech: ["Power BI", "Data Analytics", "KPI Tracking", "Gantt Charts"],
       image: "https://placehold.co/600x400/0a0a0a/purple?text=Power+BI+Dashboard"
-    },
+    }, */
     {
       title: "AI-Powered Meal Planning Agent",
       category: "Artificial Intelligence",
       duration: "2025 - 2026",
       description: "Built a Python-based AI meal planning system using RAG with Qdrant, Gemini AI reasoning, and automated meal scheduling via Google Calendar, including meal ordering integration with Uber Eats and PickMe.",
       tech: ["Python", "Google Gemini API", "Qdrant", "Google Calendar API"],
-      image: "https://placehold.co/600x400/0a0a0a/pink?text=AI+Meal+Planner"
+      image: mealPlannerImg
     },
     {
       title: "SahanaLanka Emergency Alert App",
@@ -250,7 +347,8 @@ function App() {
       duration: "2025 - 2026",
       description: "Mobile application designed to help Sri Lankan citizens respond quickly during emergencies by sending SOS alerts with GPS location via SMS and providing offline first-aid guides.",
       tech: ["Kotlin", "SQLite", "GPS API", "Android SMS API"],
-      image: "https://placehold.co/600x400/0a0a0a/red?text=SahanaLanka+App"
+      image: sahanaLankaImg,
+      images: [sahanaLankaImg, sahanaLanka1, sahanaLanka2, sahanaLanka3]
     },
     {
       title: "Thermobox - Smart Heat & Cool Lunchbox",
@@ -266,7 +364,7 @@ function App() {
       duration: "2024 - 2025",
       description: "Java OOP-based system with MySQL database for restaurant operations. Managed database operations and implemented validations as part of a collaborative development team.",
       tech: ["Java", "MySQL", "OOP"],
-      image: "https://placehold.co/600x400/0a0a0a/blue?text=Restaurant+MS"
+      image: restaurantMsImg
     },
     {
       title: "Mini-Game Development",
@@ -274,7 +372,7 @@ function App() {
       duration: "2024",
       description: "Led the design and development of a C++-based mini-game, ensuring smooth gameplay and system functionality.",
       tech: ["C++", "Algorithms", "Game Logic"],
-      image: "https://placehold.co/600x400/0a0a0a/emerald?text=Mini-Game"
+      image: doomImg
     }
   ];
 
@@ -298,10 +396,20 @@ function App() {
     {
       title: "Web Development",
       skills: ["React", "Node.js", "Docker", "Kubernetes", "GitHub Actions", "APIs"]
+    },
+    {
+      title: "ERP Systems",
+      skills: ["ERP", "SAP", "Oracle"]
     }
   ];
 
   const certifications = [
+    {
+      title: "Business Analysis Foundations",
+      issuer: "LinkedIn",
+      thumbnail: certBAFoundations,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/4e7ac09e366aad804c563a2107707f3ea2b9578f9abde355457eb2011705749c?trk=share_certificate"
+    },
     {
       title: "Business Analysis Essential Tools and Techniques",
       issuer: "Microsoft & LinkedIn",
@@ -548,7 +656,8 @@ function App() {
                   idx === 1 ? <Database className="text-indigo-400" /> :
                     idx === 2 ? <BrainCircuit className="text-purple-400" /> :
                       idx === 3 ? <Workflow className="text-pink-400" /> :
-                        <Code className="text-teal-400" />}
+                        idx === 4 ? <Code className="text-teal-400" /> :
+                          <Cpu className="text-orange-400" />}
                 {cat.title}
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -571,70 +680,7 @@ function App() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((proj, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card group flex flex-col h-full hover:-translate-y-2 relative overflow-hidden p-0"
-            >
-              {/* Project Image Pane */}
-              <div className="w-full h-48 overflow-hidden relative bg-[#0c0c1a]">
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100"
-                />
-
-
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-80"></div>
-                <div className="absolute top-4 right-4 z-10 flex gap-2">
-                  {proj.githubUrl ? (
-                    <a href={proj.githubUrl} target="_blank" rel="noreferrer" title="View Source on GitHub" className="p-2 rounded-full bg-transparent border border-transparent hover:border-white/30 text-white/80 hover:text-white hover:-translate-y-1 hover:bg-white/10 transition-all duration-300 drop-shadow-lg relative z-20 pointer-events-auto">
-                      <Github size={16} />
-                    </a>
-                  ) : (
-                    <div className="p-2 rounded-full bg-transparent border border-transparent text-white/30 transition-colors cursor-default drop-shadow-lg relative z-20 hover:text-white/40" title="Source Code Coming Soon">
-                      <Github size={16} />
-                    </div>
-                  )}
-                  {proj.liveUrl ? (
-                    <a href={proj.liveUrl} target="_blank" rel="noreferrer" title="View Live Project" className="p-2 rounded-full bg-indigo-500/20 backdrop-blur-md border border-white/10 text-white/70 hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300 shadow-lg relative z-20 pointer-events-auto">
-                      <ExternalLink size={16} />
-                    </a>
-                  ) : (
-                    <div className="p-2 rounded-full bg-indigo-500/5 backdrop-blur-md border border-white/5 text-white/30 transition-colors shadow-none cursor-default hover:text-white/40" title="Link Coming Soon">
-                      <ExternalLink size={16} />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6 relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[50px] group-hover:bg-cyan-500/20 transition-colors pointer-events-none z-0"></div>
-                <div className="flex justify-between items-start mb-4 relative z-10">
-                  <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-500/20">
-                    {proj.category}
-                  </span>
-                  <span className="text-[10px] text-slate-500 font-medium">{proj.duration}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors leading-tight">{proj.title}</h3>
-                <p className="text-sm text-slate-400 mb-6 flex-1 leading-relaxed line-clamp-3 group-hover:text-slate-300 transition-colors">
-                  {proj.description}
-                </p>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
-                  {proj.tech.map(t => (
-                    <span key={t} className="flex items-center gap-1.5 text-[10px] text-slate-300 font-medium px-2 py-1 bg-white/[0.03] rounded-md border border-white/5 hover:-translate-y-0.5 shadow-sm hover:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:text-cyan-400 transition-all duration-300 cursor-default relative z-10">
-                      {getTechIcon(t)}
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={idx} proj={proj} idx={idx} />
           ))}
         </div>
       </section>
