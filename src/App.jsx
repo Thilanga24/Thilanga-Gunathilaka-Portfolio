@@ -97,6 +97,7 @@ import leoLogo from './assets/Leo.png';
 import uokLogo from './assets/uok_logo.png';
 import peoplesBankLogo from './assets/Peoples bank-Photoroom.png';
 import esuLogo from './assets/ESU Uni.png';
+import ieeeLogo from './assets/Untitled.png';
 import rrckLogo from './assets/RRCK-Photoroom.png';
 import agileSvg from './assets/tech/agile.svg';
 import kanbanSvg from './assets/tech/kanban.svg';
@@ -119,11 +120,16 @@ import restaurantMsImg from './assets/projects/resturant ms.jpg';
 import certBA from './assets/certificates/Screenshot 2026-03-25 132855.png';
 import certPM from './assets/certificates/Screenshot 2026-04-08 113409.png';
 import certBAFoundations from './assets/certificates/Screenshot 2026-05-28 130510.png';
+import certAIBusinessAnalysis from './assets/certificates/Screenshot 2026-05-28 221334.png';
+import certAgileMSProject from './assets/certificates/Screenshot 2026-05-28 223840.png';
+import certManagingJira from './assets/certificates/Screenshot 2026-05-29 120842.png';
 
 // Import Badges
 import badgeSalesforce from './assets/badges/agentblazer-level-1-a564a869686f7b888fabd8c82dafaf25928fa006be2388ab57e6f232876c2bf0.png';
 import badgeGithub1 from './assets/badges/1775581859666.jpg';
 import badgeGithub2 from './assets/badges/1775581859791.jpg';
+import badgePython from './assets/badges/twitter_thumb_201604_image.png';
+import badgePostman from './assets/badges/1adacd02-2d29-432d-bcbb-830e5adbb726.png';
 
 // Fallback images in case assets are missing
 const defaultLogo = "https://ui-avatars.com/api/?name=Logo&background=1e293b&color=fff";
@@ -405,6 +411,24 @@ function App() {
 
   const certifications = [
     {
+      title: "Managing Jira Projects: 1 Introduction",
+      issuer: "LinkedIn",
+      thumbnail: certManagingJira,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/d5a7a8afcc83579284cb634635c928cc08f030e9f9cb4f8efa4de7d038eae422?trk=share_certificate"
+    },
+    {
+      title: "Agile Project Management with Microsoft Project",
+      issuer: "Microsoft & LinkedIn",
+      thumbnail: certAgileMSProject,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/2beb81c96c0c7a6701c4fcab0ec7b931696c385042186cceffe7aa6cacf089b1?trk=share_certificate"
+    },
+    {
+      title: "Learning AI for Business Analysis",
+      issuer: "LinkedIn",
+      thumbnail: certAIBusinessAnalysis,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/569265394df5a6669bc65243a2c4570c825ff6fff46e593d956bd44e57ab88f7?trk=share_certificate"
+    },
+    {
       title: "Business Analysis Foundations",
       issuer: "LinkedIn",
       thumbnail: certBAFoundations,
@@ -431,8 +455,8 @@ function App() {
 
   const digitalBadges = [
     { title: "Agentblazer Champion", issuer: "Salesforce", image: badgeSalesforce },
-    { title: "Python Essentials 1", issuer: "Python Institute", image: "https://placehold.co/400x400/eab308/fff?text=Python" },
-    { title: "API Fundamentals", issuer: "Postman", image: "https://placehold.co/400x400/ff6c37/fff?text=Postman" },
+    { title: "Python Essentials 1", issuer: "Cisco Networking Academy", image: badgePython, isSquare: true },
+    { title: "API Fundamentals", issuer: "Postman", image: badgePostman },
     { title: "GitHub for Beginners", issuer: "GitHub", image: badgeGithub1, removeBg: true },
     { title: "GitHub Actions Beginner", issuer: "GitHub", image: badgeGithub2, removeBg: true }
   ];
@@ -453,7 +477,7 @@ function App() {
     {
       role: "Member",
       org: "IEEE Student Branch of University of Kelaniya",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/IEEE_logo.svg/512px-IEEE_logo.svg.png",
+      logo: ieeeLogo || defaultLogo,
       description: "Active member, participating in technical workshops, seminars, and fostering innovation within the community."
     },
     {
@@ -903,8 +927,8 @@ function App() {
                 className="glass-card group relative overflow-hidden flex flex-col items-center p-5 hover:-translate-y-2 transition-transform duration-300 hover:border-yellow-500/30"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500/10 blur-[40px] group-hover:bg-orange-500/20 transition-colors pointer-events-none z-0"></div>
-                <div className="w-20 h-20 lg:w-24 lg:h-24 mb-4 rounded-full overflow-hidden bg-white/5 border-[3px] border-white/10 p-1 shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.2)] transition-all duration-300 group-hover:scale-110 relative z-10">
-                  <div className={`w-full h-full rounded-full ${badge.removeBg ? 'bg-white' : 'bg-[#1e293b]'} overflow-hidden flex items-center justify-center relative`}>
+                <div className={`w-20 h-20 lg:w-24 lg:h-24 mb-4 ${badge.isSquare ? 'rounded-2xl' : 'rounded-full'} overflow-hidden bg-white/5 border-[3px] border-white/10 p-1 shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.2)] transition-all duration-300 group-hover:scale-110 relative z-10`}>
+                  <div className={`w-full h-full ${badge.isSquare ? 'rounded-xl' : 'rounded-full'} ${badge.removeBg ? 'bg-white' : 'bg-[#1e293b]'} overflow-hidden flex items-center justify-center relative`}>
                     <img
                       src={badge.image}
                       alt={badge.title}
