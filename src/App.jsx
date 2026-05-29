@@ -60,7 +60,8 @@ const getTechIcon = (tech) => {
     'jira': 'jira/jira-original',
     'confluence': 'confluence/confluence-original',
     'typescript': 'typescript/typescript-original',
-    'c': 'c/c-original'
+    'c': 'c/c-original',
+    'oracle': 'oracle/oracle-original'
   };
 
   const simpleiconMap = {
@@ -76,8 +77,7 @@ const getTechIcon = (tech) => {
     'gemini api': 'googlegemini/8E75B2',
     'langchain': 'langchain/6DA099',
     'google calendar api': 'googlecalendar/4285F4',
-    'sap': 'sap/008FD3',
-    'oracle': 'oracle/F80000'
+    'sap': 'sap/008FD3'
   };
 
   const directImageUrl = directImageMap[t];
@@ -123,6 +123,8 @@ import certBAFoundations from './assets/certificates/Screenshot 2026-05-28 13051
 import certAIBusinessAnalysis from './assets/certificates/Screenshot 2026-05-28 221334.png';
 import certAgileMSProject from './assets/certificates/Screenshot 2026-05-28 223840.png';
 import certManagingJira from './assets/certificates/Screenshot 2026-05-29 120842.png';
+import certIntroAI from './assets/certificates/Screenshot 2026-05-29 122810.png';
+import certLearningJiraCloud from './assets/certificates/Screenshot 2026-05-29 123956.png';
 
 // Import Badges
 import badgeSalesforce from './assets/badges/agentblazer-level-1-a564a869686f7b888fabd8c82dafaf25928fa006be2388ab57e6f232876c2bf0.png';
@@ -235,6 +237,30 @@ const ProjectCard = ({ proj, idx }) => {
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [formStatus, setFormStatus] = useState(null); // 'sending', 'success', 'error'
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus('sending');
+    const formData = new FormData(e.target);
+    formData.append("access_key", "6bd3b12b-3c54-41c6-b6b6-0d38b6a8612a");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+      if (data.success) {
+        setFormStatus('success');
+        e.target.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      setFormStatus('error');
+    }
+  };
 
 
 
@@ -411,28 +437,10 @@ function App() {
 
   const certifications = [
     {
-      title: "Managing Jira Projects: 1 Introduction",
-      issuer: "LinkedIn",
-      thumbnail: certManagingJira,
-      verifyUrl: "https://www.linkedin.com/learning/certificates/d5a7a8afcc83579284cb634635c928cc08f030e9f9cb4f8efa4de7d038eae422?trk=share_certificate"
-    },
-    {
       title: "Agile Project Management with Microsoft Project",
       issuer: "Microsoft & LinkedIn",
       thumbnail: certAgileMSProject,
       verifyUrl: "https://www.linkedin.com/learning/certificates/2beb81c96c0c7a6701c4fcab0ec7b931696c385042186cceffe7aa6cacf089b1?trk=share_certificate"
-    },
-    {
-      title: "Learning AI for Business Analysis",
-      issuer: "LinkedIn",
-      thumbnail: certAIBusinessAnalysis,
-      verifyUrl: "https://www.linkedin.com/learning/certificates/569265394df5a6669bc65243a2c4570c825ff6fff46e593d956bd44e57ab88f7?trk=share_certificate"
-    },
-    {
-      title: "Business Analysis Foundations",
-      issuer: "LinkedIn",
-      thumbnail: certBAFoundations,
-      verifyUrl: "https://www.linkedin.com/learning/certificates/4e7ac09e366aad804c563a2107707f3ea2b9578f9abde355457eb2011705749c?trk=share_certificate"
     },
     {
       title: "Business Analysis Essential Tools and Techniques",
@@ -441,16 +449,40 @@ function App() {
       verifyUrl: "https://www.linkedin.com/learning/certificates/2ebb2fa010f54b7ff92abb27b9539842c0980299a5a690d588b776431fcf7155?trk=share_certificate"
     },
     {
+      title: "Business Analysis Foundations",
+      issuer: "LinkedIn",
+      thumbnail: certBAFoundations,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/4e7ac09e366aad804c563a2107707f3ea2b9578f9abde355457eb2011705749c?trk=share_certificate"
+    },
+    {
+      title: "Introduction to Artificial Intelligence",
+      issuer: "LinkedIn",
+      thumbnail: certIntroAI,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/19cbd6f02dc0253cdda07a01505d77de95b58f9e82507772a1291883a990698a?trk=share_certificate"
+    },
+    {
+      title: "Learning AI for Business Analysis",
+      issuer: "LinkedIn",
+      thumbnail: certAIBusinessAnalysis,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/569265394df5a6669bc65243a2c4570c825ff6fff46e593d956bd44e57ab88f7?trk=share_certificate"
+    },
+    {
+      title: "Learning Jira (Cloud Edition)",
+      issuer: "LinkedIn",
+      thumbnail: certLearningJiraCloud,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/711e50db578f3e0a07d28efaa0bf64c5a533828f6be43e3a4030864b1d0a6afb?trk=share_certificate"
+    },
+    {
+      title: "Managing Jira Projects: 1 Introduction",
+      issuer: "LinkedIn",
+      thumbnail: certManagingJira,
+      verifyUrl: "https://www.linkedin.com/learning/certificates/d5a7a8afcc83579284cb634635c928cc08f030e9f9cb4f8efa4de7d038eae422?trk=share_certificate"
+    },
+    {
       title: "Project Management Foundations",
       issuer: "Microsoft & LinkedIn",
       thumbnail: certPM
-    },
-    { title: "Career Essentials in Business Analysis", issuer: "Microsoft & LinkedIn" },
-    { title: "Agile Project Management", issuer: "LinkedIn" },
-    { title: "Scrum: The Basics", issuer: "LinkedIn" },
-    { title: "Power BI Data Visualization", issuer: "LinkedIn" },
-    { title: "AI/ML Engineering", issuer: "SLIT University" },
-    { title: "Learning Jira", issuer: "Microsoft & LinkedIn" }
+    }
   ];
 
   const digitalBadges = [
@@ -1046,10 +1078,10 @@ function App() {
 
         <div className="text-center mb-16 relative z-10">
           <h2 className="text-3xl md:text-5xl mb-4">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Collaborate?</span>
+            Looking to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Hire or Collaborate?</span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Whether you have a specific project in mind, need a consultant to streamline your operations, or just want to connect, I'm here to help turn ideas into reality.
+            I am actively seeking internship opportunities in Business Analysis, Project Management, or System Engineering. Let's connect to discuss how I can add value to your team.
           </p>
         </div>
 
@@ -1091,7 +1123,7 @@ function App() {
 
             {/* Added Download CV specifically built into the contact logic */}
             <div className="mt-12 pt-8 border-t border-white/10">
-              <p className="text-slate-400 text-sm mb-5">Looking for more detailed professional history?</p>
+              <p className="text-slate-400 text-sm mb-5">Looking for my detailed qualifications and resume?</p>
               <a href="/CV.pdf" download="Thilanga_Gunathilaka_CV.pdf" className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-[#030014] text-xs font-bold uppercase tracking-wider transition-all duration-300 group shadow-lg">
                 <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
                 Download Full Resume
@@ -1100,28 +1132,61 @@ function App() {
           </div>
 
           {/* Right Column: Sleek Form */}
-          <div className="bg-white/[0.02] border border-white/5 p-8 md:p-10 rounded-3xl backdrop-blur-sm relative overflow-hidden flex flex-col justify-center">
+          <div className="bg-white/[0.02] border border-white/5 p-8 md:p-10 rounded-3xl backdrop-blur-sm relative overflow-hidden flex flex-col justify-center min-h-[400px]">
             {/* Form aesthetic background mesh */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-[80px] rounded-full pointer-events-none"></div>
 
-            <h3 className="text-xl font-bold text-white mb-6 relative z-10">Send a Message</h3>
-            <form className="space-y-6 relative z-10" onSubmit={e => e.preventDefault()}>
-              <div className="space-y-1.5">
-                <input type="text" className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Your Name" />
+            {formStatus === 'success' ? (
+              <div className="text-center py-8 space-y-5 relative z-10">
+                <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                  <CheckCircle2 size={32} />
+                </div>
+                <h4 className="text-xl font-bold text-white">Message Sent!</h4>
+                <p className="text-slate-400 text-sm max-w-xs mx-auto leading-relaxed">
+                  Thank you for reaching out. Your message has been sent successfully. I will get back to you as soon as possible!
+                </p>
+                <button 
+                  onClick={() => setFormStatus(null)} 
+                  className="mt-2 px-6 py-2.5 rounded-xl border border-white/10 text-white hover:bg-white/5 hover:border-white/20 transition-all text-xs font-bold uppercase tracking-wider"
+                >
+                  Send Another Message
+                </button>
               </div>
-              <div className="space-y-1.5">
-                <input type="email" className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Email Address" />
-              </div>
-              <div className="space-y-1.5 pt-1.5">
-                <input type="text" className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Subject" />
-              </div>
-              <div className="space-y-1.5 pt-1.5">
-                <textarea rows="3" className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors resize-none placeholder:text-slate-600 font-medium text-base" placeholder="Tell me about your project..."></textarea>
-              </div>
-              <button className="w-full mt-6 py-3.5 rounded-xl font-bold bg-white text-[#030014] hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 text-base shadow-xl active:scale-95">
-                Submit Inquiry <ChevronRight size={18} />
-              </button>
-            </form>
+            ) : (
+              <>
+                <h3 className="text-xl font-bold text-white mb-6 relative z-10">Send a Message</h3>
+                <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+                  <div className="space-y-1.5">
+                    <input type="text" name="name" required className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Your Name" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <input type="email" name="email" required className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Email Address" />
+                  </div>
+                  <div className="space-y-1.5 pt-1.5">
+                    <input type="text" name="subject" required className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-600 font-medium text-base" placeholder="Subject" />
+                  </div>
+                  <div className="space-y-1.5 pt-1.5">
+                    <textarea rows="3" name="message" required className="w-full bg-transparent border-b border-white/20 px-0 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition-colors resize-none placeholder:text-slate-600 font-medium text-base" placeholder="How can I help your team? (e.g., internship roles, opportunities...)"></textarea>
+                  </div>
+
+                  {formStatus === 'error' && (
+                    <p className="text-red-400 text-sm text-center font-medium bg-red-500/10 border border-red-500/20 py-2.5 rounded-xl">
+                      Something went wrong. Please try again later.
+                    </p>
+                  )}
+
+                  {formStatus === 'sending' ? (
+                    <button disabled className="w-full mt-6 py-3.5 rounded-xl font-bold bg-white/50 text-[#030014] transition-all flex items-center justify-center gap-2 text-base shadow-xl cursor-not-allowed">
+                      <RefreshCw className="animate-spin" size={18} /> Sending...
+                    </button>
+                  ) : (
+                    <button type="submit" className="w-full mt-6 py-3.5 rounded-xl font-bold bg-white text-[#030014] hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 text-base shadow-xl active:scale-95">
+                      Send Message <ChevronRight size={18} />
+                    </button>
+                  )}
+                </form>
+              </>
+            )}
           </div>
 
         </div>
