@@ -23,6 +23,14 @@ const getTechIcon = (tech) => {
   if (t === 'apis' || t === 'api') return <Code2 size={18} className="text-pink-400" />;
   if (t === 'erp') return <Database size={18} className="text-orange-400" />;
 
+  // Brand logos and tools
+  if (t.includes('sap')) return <img src="https://cdn.simpleicons.org/sap/008FD3" alt={tech} className="w-5 h-5 object-contain" />;
+  if (t.includes('oracle')) return <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" alt={tech} className="w-5 h-5 object-contain" />;
+  if (t.includes('dynamics 365') || t.includes('microsoft dynamics')) return <img src="https://cdn.simpleicons.org/microsoftdynamics365/0078D4" alt={tech} className="w-5 h-5 object-contain" />;
+  if (t.includes('odoo')) return <img src="https://cdn.simpleicons.org/odoo/714B67" alt={tech} className="w-5 h-5 object-contain" />;
+  if (t.includes('langchain')) return <img src="https://cdn.simpleicons.org/langchain/6DA099" alt={tech} className="w-5 h-5 object-contain" />;
+  if (t.includes('llamaindex')) return <Bot size={18} className="text-pink-400" />;
+
   const directImageMap = {
     'agile': agileSvg,
     'kanban': kanbanSvg,
@@ -77,7 +85,9 @@ const getTechIcon = (tech) => {
     'gemini api': 'googlegemini/8E75B2',
     'langchain': 'langchain/6DA099',
     'google calendar api': 'googlecalendar/4285F4',
-    'sap': 'sap/008FD3'
+    'sap': 'sap/008FD3',
+    'salesforce': 'salesforce/00A1E0',
+    'microsoft': 'microsoft/F25022'
   };
 
   const directImageUrl = directImageMap[t];
@@ -115,6 +125,28 @@ import sahanaLanka2 from './assets/projects/photo_2026-05-28_11-29-31.jpg';
 import sahanaLanka3 from './assets/projects/photo_2026-05-28_11-29-34.jpg';
 import doomImg from './assets/projects/doom.jpg';
 import restaurantMsImg from './assets/projects/resturant ms.jpg';
+import hackXJr1 from './assets/events/hack x jr (1).jpg';
+import hackXJr2 from './assets/events/hack x jr (2).jpg';
+import hackXJr3 from './assets/events/hack x jr (3).jpg';
+import cf1 from './assets/events/CF (1).jpg';
+import cf2 from './assets/events/CF (2).jpg';
+import cf3 from './assets/events/CF (3).jpg';
+import cf4 from './assets/events/CF (4).jpg';
+import ms1 from './assets/events/MS (1).jpg';
+import ms2 from './assets/events/MS (2).jpg';
+import ms3 from './assets/events/MS (3).jpg';
+import evolveX1 from './assets/events/X (1).jpg';
+import evolveX3 from './assets/events/X (3).jpg';
+import evolveX4 from './assets/events/X (4).jpg';
+import dtw1 from './assets/events/DTW (1).jpg';
+import dtw2 from './assets/events/DTW (2).jpg';
+import dtw3 from './assets/events/DTW (3).jpg';
+import expo1 from './assets/events/Expo (1).jpg';
+import expo2 from './assets/events/Expo (2).jpg';
+import expo3 from './assets/events/Expo (3).jpg';
+import hackX1 from './assets/events/HackX (1).jpg';
+import hackX2 from './assets/events/HackX (2).jpg';
+import hackX3 from './assets/events/HackX (3).jpg';
 
 // Import Certificates
 import certBA from './assets/certificates/Screenshot 2026-03-25 132855.png';
@@ -419,7 +451,7 @@ function App() {
     },
     {
       title: "Artificial Intelligence",
-      skills: ["RAG", "Prompt Engineering", "Large Language Models", "Gemini API", "LangChain"]
+      skills: ["Retrieval-Augmented Generation (RAG)", "Agentic AI", "Prompt Engineering", "Large Language Models (LLMs)"]
     },
     {
       title: "Programming Languages",
@@ -431,7 +463,7 @@ function App() {
     },
     {
       title: "ERP Systems",
-      skills: ["ERP", "SAP", "Oracle"]
+      skills: ["SAP", "Oracle", "Salesforce", "Microsoft", "Odoo"]
     }
   ];
 
@@ -523,58 +555,46 @@ function App() {
   const communityEvents = [
     {
       title: "Down the Wicket",
-      role: "Organizer",
+      role: "PR Coordinator",
       description: "Actively contributed to the planning and execution of the 'Down the Wicket' event, coordinating logistics and fostering team collaboration.",
-      images: [
-        "https://placehold.co/800x600/0f172a/fff?text=Wicket+1",
-        "https://placehold.co/800x600/1e293b/fff?text=Wicket+2"
-      ]
+      images: [dtw1, dtw2, dtw3]
     },
     {
       title: "Career Fair",
-      role: "Coordinator",
+      role: "PR Coordinator",
       description: "Facilitated interactions between students and corporate representatives, ensuring a seamless event flow and valuable networking opportunities.",
-      images: [
-        "https://placehold.co/800x600/1e293b/fff?text=Main+Fair",
-        "https://placehold.co/800x600/0f172a/fff?text=Fair+2",
-        "https://placehold.co/800x600/1e293b/fff?text=Fair+3"
-      ]
+      images: [cf1, cf2, cf3, cf4]
     },
     {
       title: "HackX",
-      role: "Participant",
+      role: "Organizer",
       description: "Engaged in the HackX hackathon, contributing to innovative tech solutions and collaborative development within a fast-paced environment.",
-      image: "https://placehold.co/800x600/0f172a/fff?text=HackX+Event"
+      images: [hackX1, hackX2, hackX3]
     },
     {
       title: "HackX Jr",
-      role: "Volunteer",
+      role: "Organizer",
       description: "Guided and mentored younger students during HackX Jr, fostering their interest in technology and problem-solving.",
-      image: "https://placehold.co/800x600/1e293b/fff?text=HackX+Jr+Event"
+      images: [hackXJr1, hackXJr2, hackXJr3]
     },
     {
       title: "Exposition",
-      role: "Coordinator",
+      role: "Organizer",
       description: "Helped manage and structure the Exposition event, ensuring smooth operations and high engagement from attendees and exhibitors.",
-      image: "https://placehold.co/800x600/0f172a/fff?text=Exposition+Event"
+      images: [expo1, expo2, expo3]
     },
     {
       title: "Media Spark",
-      role: "Media Team",
+      role: "PR Coordinator",
       description: "Handled digital media and content creation for Media Spark, significantly boosting the event's reach and audience engagement.",
-      image: "https://placehold.co/800x600/1e293b/fff?text=Media+Spark+Event"
+      images: [ms1, ms2, ms3]
     },
-    {
-      title: "Spotlight",
-      role: "Core Team",
-      description: "Played a key role in orchestrating Spotlight, focusing on event logistics, branding, and ensuring a memorable experience for participants.",
-      image: "https://placehold.co/800x600/0f172a/fff?text=Spotlight+Event"
-    },
+
     {
       title: "EvolveX",
       role: "Team Leader",
       description: "Led the core team for EvolveX, overseeing coordination, strategic planning, and overall stakeholder communication for maximum impact.",
-      image: "https://placehold.co/800x600/1e293b/fff?text=EvolveX+Event"
+      images: [evolveX4, evolveX1, evolveX3]
     }
   ];
 
